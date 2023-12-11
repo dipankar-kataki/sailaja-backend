@@ -27,9 +27,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // const logger = morgan("combined");
-app.use(cors({
-  origin: 'http://sailajaconstruction.com/admin'
-}));
+// app.use(cors({
+//   origin: 'http://sailajaconstruction.com/admin'
+// }));
 app.use(multer().any());
 // const corsOptions = {
 //   origin: ["*", "http://localhost:5174", "http://127.0.0.1:5174"],  // Replace with your React app's domain
@@ -48,8 +48,8 @@ app.use(multer().any());
 //   callback(null, corsOptions) // callback expects two parameters: error and options
 // }
 
-// app.use(cors());
-// app.options(["*", "http://127.0.0.1:5174/admin"], cors());
+app.use(cors());
+app.options("*", cors());
 app.use(xss());
 
 const limiter = rateLimit({
@@ -60,19 +60,19 @@ const limiter = rateLimit({
     req.headers["x-forwarded-for"] || req.connection.remoteAddress,
 });
 
-app.use("/backend/public", express.static(join(__dirName, "../public")));
+app.use("/public", express.static(join(__dirName, "../public")));
 
-app.use("/backend", limiter);
+app.use("/", limiter);
 app.use(compression());
 
-app.use("/backend/api", amenityRoutes);
-app.use("/backend/api", adminRoutes);
-app.use("/backend/api", projectRoutes);
-app.use("/backend/api", testimonyRoutes);
-app.use("/backend/api", contactRoutes);
-app.use("/backend/api", enquiryRoutes);
-app.use("/backend/api", galleryRoutes);
-app.use("/backend/api", homeRoutes);
+app.use("/api", amenityRoutes);
+app.use("/api", adminRoutes);
+app.use("/api", projectRoutes);
+app.use("/api", testimonyRoutes);
+app.use("/api", contactRoutes);
+app.use("/api", enquiryRoutes);
+app.use("/api", galleryRoutes);
+app.use("/api", homeRoutes);
 
 app.all("*", (req, res, next) => {
   return res
