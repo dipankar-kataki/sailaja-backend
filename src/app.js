@@ -26,17 +26,28 @@ dotenv.config({ path: join(__dirName, ".env") });
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const logger = morgan("combined");
+// const logger = morgan("combined");
 
 app.use(multer().any());
-const corsOptions = {
-  origin: ["*", "http://localhost:5174", "http://127.0.0.1:5174"],  // Replace with your React app's domain
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  exposedHeaders: ["x-forwarded-for"], // Add any custom headers here
-};
+// const corsOptions = {
+//   origin: ["*", "http://localhost:5174", "http://127.0.0.1:5174"],  // Replace with your React app's domain
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   exposedHeaders: ["x-forwarded-for"], // Add any custom headers here
+// };
+
+// var allowlist = ["*", "http://localhost:5174", "http://127.0.0.1:5174"]
+// var corsOptionsDelegate = function (req, callback) {
+//   var corsOptions;
+//   if (allowlist.indexOf(req.header('Origin')) !== -1) {
+//     corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+//   } else {
+//     corsOptions = { origin: false } // disable CORS for this request
+//   }
+//   callback(null, corsOptions) // callback expects two parameters: error and options
+// }
 
 app.use(cors());
-app.options(["*", "http://127.0.0.1:5174/admin"], cors());
+// app.options(["*", "http://127.0.0.1:5174/admin"], cors());
 app.use(xss());
 
 const limiter = rateLimit({
