@@ -27,7 +27,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // const logger = morgan("combined");
-
+app.use(cors({
+  origin: 'http://sailajaconstruction.com/admin'
+}));
 app.use(multer().any());
 // const corsOptions = {
 //   origin: ["*", "http://localhost:5174", "http://127.0.0.1:5174"],  // Replace with your React app's domain
@@ -46,7 +48,7 @@ app.use(multer().any());
 //   callback(null, corsOptions) // callback expects two parameters: error and options
 // }
 
-app.use(cors());
+// app.use(cors());
 // app.options(["*", "http://127.0.0.1:5174/admin"], cors());
 app.use(xss());
 
