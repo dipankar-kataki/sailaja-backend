@@ -53,14 +53,14 @@ app.use("/backend/public", express.static(join(__dirName, "../public")));
 app.use("/backend", limiter);
 app.use(compression());
 
-app.use("backend/api", amenityRoutes);
-app.use("backend/api", adminRoutes);
-app.use("backend/api", projectRoutes);
-app.use("backend/api", testimonyRoutes);
-app.use("backend/api", contactRoutes);
-app.use("backend/api", enquiryRoutes);
-app.use("backend/api", galleryRoutes);
-app.use("backend/api", homeRoutes);
+app.use("/backend/api", amenityRoutes);
+app.use("/backend/api", adminRoutes);
+app.use("/backend/api", projectRoutes);
+app.use("/backend/api", testimonyRoutes);
+app.use("/backend/api", contactRoutes);
+app.use("/backend/api", enquiryRoutes);
+app.use("/backend/api", galleryRoutes);
+app.use("/backend/api", homeRoutes);
 
 app.all("*", (req, res, next) => {
   return res
