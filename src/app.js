@@ -36,8 +36,7 @@ const corsOptions = {
 };
 
 app.use(cors());
-app.options("*", cors());
-
+app.options(["*", "http://127.0.0.1:5174/admin"], cors());
 app.use(xss());
 
 const limiter = rateLimit({
